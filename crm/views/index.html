@@ -19,14 +19,14 @@
 
     <div id="result"></div>
 
-    <h1>========static array of color  <u>api url:/student</u>==============</h1>
+    <h1>========static array of color  <u>api url: /students/student</u>==============</h1>
     <div id="json"></div>
 
-    <h1>=============single static student===============</h1>
-    <h2 id="studnetJson"></h2>
+    <h1>=============single static student <u>api url: /students/student</u>===============</h1>
+    <h2 id="studentJson"></h2>
 
 
-    <h1>=============dynamic students <u>api url: /students</u>===============</h1>
+    <h1>=============dynamic students <u>api url: /students/students</u>===============</h1>
     <form method="post" action="/students/save">
         <input type="text" name="name" id="name" required />
         <button type="submit">Insert Student</button>
@@ -35,7 +35,7 @@
 
     <script>
         $(document).ready(function () {
-            $.get("/data", function (res) {
+            $.get("/students/data", function (res) {
                 $("#result").html(res);
             });
         });
@@ -43,7 +43,7 @@
 
     <script>
         $(document).ready(function () {
-            $.get("/json", function (res) {
+            $.get("/students/json", function (res) {
                 // console.log(res);
                 var content = '';
                 $.each(res, function (i, a) {
@@ -57,8 +57,8 @@
     </script>
     <script>
         $(document).ready(function () {
-            $.getJSON("/student", function (res) {
-                $("#studnetJson").html(res.name);
+            $.getJSON("/students/student", function (res) {
+                $("#studentJson").html(res.name);
             });
         });
     </script>
