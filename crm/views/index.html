@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Welcome Node Express</h1>
+    <div style="border: 1px solid black">
+        <h2>Navigation Rules</h2>
+        <h2>Type following in main url:<br/> /data, /json, /student, /students (for getAll from stdService)</h2>
+    </div>
+
+
+    <div id="result"></div>
+
+    <h1>========static array of color  <u>api url:/student</u>==============</h1>
+    <div id="json"></div>
+
+    <h1>=============single static student===============</h1>
+    <h2 id="studnetJson"></h2>
+
+
+    <h1>=============dynamic students <u>api url: /students</u>===============</h1>
+    <form method="post" action="/students/save">
+        <input type="text" name="name" id="name" required />
+        <button type="submit">Insert Student</button>
+    </form>
+    <div id="stdServiceDemo"></div>
+
+    <script>
+        $(document).ready(function () {
+            $.get("/data", function (res) {
+                $("#result").html(res);
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $.get("/json", function (res) {
+                // console.log(res);
+                var content = '';
+                $.each(res, function (i, a) {
+                    content += "<li>" + a + "</li>";
+                });
+                console.log(content);
+                $("#json").html(content);
+            });
+
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $.getJSON("/student", function (res) {
+                $("#studnetJson").html(res.name);
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $.get("/students", function (res) {
+                var content = '';
+                $.each(res, function (i, s) {
+                    content += "<li>" + s.name + "</li>";
+                });
+                console.log(content);
+                $("#stdServiceDemo").html(content);
+                $("#name").focus();
+            });
+
+        });
+    </script>
+</body>
+
+</html>
